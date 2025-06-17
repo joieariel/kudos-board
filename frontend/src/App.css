@@ -1,0 +1,58 @@
+.App {
+  text-align: center;
+  padding-bottom: 60px; /* Add padding to prevent content from being hidden behind the fixed footer */
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.App-header {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #ff6ba9;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 100%;
+}
+
+.banner-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.App-footer {
+  background-color: #ff6ba9;
+  color: white;
+  padding: 15px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+}
+
+.App-footer > * {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+}
+
+.main-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.App-footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
