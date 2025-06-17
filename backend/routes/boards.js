@@ -27,7 +27,7 @@ router.get("/:boardId", async (req, res) => {
   res.json(boards);
 });
 
-//create a pet (post request) using database
+//create a board (post request) using database
 router.post("/", async (req, res) => {
   const { title, description, author, img } = req.body;
   const newBoard = await prisma.board.create({
