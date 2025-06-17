@@ -1,12 +1,28 @@
 import React, { useState } from "react";
 import "./App.css";
 import Banner from "./Banner.JSX";
+import SearchBar from "./SearchBar";
+import FilterDropdown from "./FilterDropdown";
 import BoardList from "./BoardList";
 import BoardPage from "./BoardPage";
 
 const App = () => {
   // state to track the currently selected board
   const [selectedBoard, setSelectedBoard] = useState(null);
+  // state to track the search query
+  const [searchQuery, setSearchQuery] = useState("");
+  // state to track the selected category
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  // function to handle category change
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
+  // function to handle search
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
 
   // function to view a specific board
   const handleViewBoard = (board) => {
@@ -35,8 +51,17 @@ const App = () => {
           <div className="banner-container">
             <Banner />
           </div>
+          <SearchBar onSearch={handleSearch} />
+          <FilterDropdown
+            selectedCategory={selectedCategory}
+            onCategoryChange={handleCategoryChange}
+          />
           <main className="main-content">
-            <BoardList onViewBoard={handleViewBoard} />
+            <BoardList
+              onViewBoard={handleViewBoard}
+              searchQuery={searchQuery}
+              selectedCategory={selectedCategory}
+            />
           </main>
         </>
       )}
