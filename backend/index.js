@@ -7,6 +7,7 @@ const routes = require("./routes/boards");
 
 app.use(express.json());
 app.use("/boards", routes);
+app.use("/cards", routes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to my app!");
