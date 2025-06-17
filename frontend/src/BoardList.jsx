@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import KudosBoard from "./KudosBoard";
 import kudosData from "./data/data";
+import CreateBoardModal from "./CreateBoardModal";
 import "./BoardList.css";
 
 const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
@@ -8,6 +9,8 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
   const [boards, setBoards] = useState(kudosData);
   // state to store filtered boards
   const [filteredBoards, setFilteredBoards] = useState(kudosData);
+  // state to control modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // filter boards when search query or category changes
   useEffect(() => {
@@ -54,6 +57,14 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
     setBoards(updatedBoards);
   };
 
+  // function to create a new board
+  const createBoard = (newBoard) => {
+    // add the new board to the boards array
+    const updatedBoards = [...boards, newBoard];
+    // update the state with the new array that includes the new board
+    setBoards(updatedBoards);
+  };
+
   // function to handle viewing a board
   const handleViewBoard = (id) => {
     // find the board with the matching id
@@ -66,7 +77,20 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
 
   return (
     <div className="board-list-container">
-      <h2 className="section-title">Kudos Board</h2>
+      <div className="board-header">
+        <h2 className="section-title">Kudos Board</h2>
+        <button className="create-button" onClick={() => setIsModalOpen(true)}>
+          <span className="plus-icon">+</span>
+          Create New
+        </button>
+      </div>
+      {/* Create Board Modal */}
+      <CreateBoardModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onCreateBoard={createBoard}
+      />
+
       <div className="board-grid">
         {filteredBoards.length > 0 ? (
           filteredBoards.map((board) => (
