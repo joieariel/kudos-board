@@ -2,6 +2,7 @@ import React from "react";
 import "./BoardPage.css";
 
 const BoardPage = ({ board, onBack }) => {
+
   return (
     <div className="board-page">
       <div className="board-page-header">
@@ -18,9 +19,23 @@ const BoardPage = ({ board, onBack }) => {
             <p className="board-page-author">By: {board.author}</p>
           </div>
         </div>
+
         <div className="board-page-cards">
           <h3>Cards in this board</h3>
-          <p>No cards yet. Cards will be displayed here.</p>
+
+          {/* display existing cards or a message if none exist */}
+          {board.cards && board.cards.length > 0 ? (
+            <div className="card-list">
+              {board.cards.map((card) => (
+                <div key={card.id} className="card">
+                  <p className="card-content">{card.content}</p>
+                  <p className="card-author">- {card.author}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No cards yet.</p>
+          )}
         </div>
       </div>
     </div>
