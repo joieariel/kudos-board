@@ -4,14 +4,15 @@ import CardModal from "./CardModal";
 
 const BoardPage = ({ board, onBack }) => {
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
+  // state to manage cards for this board
+  const [boardCards, setBoardCards] = useState(board.cards || []);
 
-  // Function to create a new card
+  // function to create a new card
   const createCard = (newCard) => {
-    // For now, just log the card - you can integrate with your data management later
     console.log("New card created:", newCard);
 
-    // You might want to add the card to your board's cards array here
-    // This depends on how you're managing your board data
+    // add the new card to the board's cards array
+    setBoardCards(prevCards => [...prevCards, newCard]);
   };
 
   return (
@@ -44,10 +45,11 @@ const BoardPage = ({ board, onBack }) => {
           </div>
 
           {/* display existing cards or a message if none exist */}
-          {board.cards && board.cards.length > 0 ? (
+          {boardCards && boardCards.length > 0 ? (
             <div className="card-list">
-              {board.cards.map((card) => (
+              {boardCards.map((card) => (
                 <div key={card.id} className="card">
+                  <h4 className="card-title">{card.title}</h4>
                   <p className="card-content">{card.content}</p>
                   <p className="card-author">- {card.author}</p>
                 </div>
