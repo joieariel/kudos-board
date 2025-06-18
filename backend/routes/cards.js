@@ -17,6 +17,14 @@ router.get("/", async (req, res) => {
   res.json(cards);
 });
 
+router.get("/:boardId/cards", async (req, res) => {
+  const cards = await prisma.card.findMany({
+    where: { boardId: parseInt(req.params.boardId) },
+  });
+  console.log(cards);
+  res.json(cards);
+});
+
 //retrieve a specific card using database
 router.get("/:cardId", async (req, res) => {
   const cardId = parseInt(req.params.cardId);
