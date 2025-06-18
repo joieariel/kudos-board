@@ -31,5 +31,6 @@ model Card {
   gifUrl   String
   gifTitle String
 
-  Board Board[]
+  board   Board @relation(fields: [boardId], references: [id])
+  boardId Int
 }
