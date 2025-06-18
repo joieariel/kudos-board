@@ -19,10 +19,15 @@ model Board {
   description String
   author      String
   img         String
+  // cards       Card[]
 }
 
 model Card {
   id          Int    @id @default(autoincrement())
   title       String
-  description String
+  content     String
+  author      String
+  gifUrl      String
+  gitTitle    String
+
 }

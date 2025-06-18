@@ -2,9 +2,11 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 
+const cors = require("cors");
+
 // import what boards exported
 const routes = require("./routes/boards");
-
+app.use(cors());
 app.use(express.json());
 app.use("/boards", routes);
 app.use("/cards", routes);
