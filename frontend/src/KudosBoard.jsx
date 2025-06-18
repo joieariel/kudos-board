@@ -1,6 +1,6 @@
 import React from "react";
 import "./KudosBoard.css";
-import img from "frontend/src/assets/img/hamilton.jpeg";
+import img from "/src/assets/img/hamilton.jpeg";
 
 const KudosBoard = ({ id, title, description, author, onDelete, onView }) => {
   // function to handle the delete button click
