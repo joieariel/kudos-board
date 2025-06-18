@@ -1,15 +1,18 @@
 const express = require("express");
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 const cors = require("cors");
 
 // import what boards exported
-const routes = require("./routes/boards");
+const boardRoutes = require("./routes/boards");
+// import what cards exported
+const cardRoutes = require("./routes/cards");
+
 app.use(cors());
 app.use(express.json());
-app.use("/boards", routes);
-app.use("/cards", routes);
+app.use("/boards", boardRoutes);
+app.use("/cards", cardRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to my app!");
