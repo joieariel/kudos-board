@@ -5,6 +5,7 @@ const CardModal = ({ isOpen, onClose, onCreateCard }) => {
   // state for form fields
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [author, setAuthor] = useState("");
 
   // state for validation errors
   const [errors, setErrors] = useState({});
@@ -13,6 +14,7 @@ const CardModal = ({ isOpen, onClose, onCreateCard }) => {
   const resetForm = () => {
     setTitle("");
     setDescription("");
+    setAuthor("");
     setErrors({});
   };
 
@@ -48,7 +50,7 @@ const CardModal = ({ isOpen, onClose, onCreateCard }) => {
         id: Date.now(), // use timestamp as temporary ID
         title: title.trim(),
         content: description.trim(), // using content to match your existing card structure
-        author: "Anonymous", // default author for now
+        author: author.trim() || "Anonymous", // use provided author or default to "Anonymous"
         createdAt: new Date()
       };
 
@@ -101,6 +103,18 @@ const CardModal = ({ isOpen, onClose, onCreateCard }) => {
                 rows="4"
               />
               {errors.description && <span className="error-message">{errors.description}</span>}
+            </div>
+
+            {/* author input */}
+            <div className="form-group">
+              <label htmlFor="author">Author (optional)</label>
+              <input
+                type="text"
+                id="author"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                placeholder="Enter your name (optional)..."
+              />
             </div>
           </form>
         </div>
