@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./BoardPage.css";
 import CardModal from "./CardModal";
+import img from "/src/assets/img/hamilton.jpeg";
 
 const BoardPage = ({ board, onBack }) => {
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
