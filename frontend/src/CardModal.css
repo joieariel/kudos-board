@@ -130,10 +130,62 @@
 }
 
 .error-message {
-  color: #ff6b6b;
-  font-size: 12px;
-  margin-top: 5px;
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
   display: block;
+}
+
+
+.selected-gif {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.gif-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.select-gif-btn,
+.change-gif-btn,
+.remove-gif-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.select-gif-btn {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.select-gif-btn:hover {
+  background: #0056b3;
+  border-color: #0056b3;
+}
+
+.change-gif-btn:hover {
+  background: #f8f9fa;
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.remove-gif-btn {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.remove-gif-btn:hover {
+  background: #dc3545;
+  color: white;
 }
 
 .cancel-button {

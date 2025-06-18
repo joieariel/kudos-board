@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./CardModal.css";
+import GifPicker from "./GifPicker";
 
 const CardModal = ({ isOpen, onClose, onCreateCard }) => {
   // state for form fields
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [author, setAuthor] = useState("");
+  const [selectedGif, setSelectedGif] = useState(null);
+  const [showGifPicker, setShowGifPicker] = useState(false);
 
   // state for validation errors
   const [errors, setErrors] = useState({});
@@ -15,6 +18,7 @@ const CardModal = ({ isOpen, onClose, onCreateCard }) => {
     setTitle("");
     setDescription("");
     setAuthor("");
+    setSelectedGif(null);
     setErrors({});
   };
 
@@ -36,6 +40,10 @@ const CardModal = ({ isOpen, onClose, onCreateCard }) => {
       newErrors.description = "Description is required";
     }
 
+    if (!selectedGif) {
+      newErrors.gif = "GIF is required";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0; // return true if no errors
   };
@@ -51,7 +59,8 @@ const CardModal = ({ isOpen, onClose, onCreateCard }) => {
         title: title.trim(),
         content: description.trim(), // using content to match your existing card structure
         author: author.trim() || "Anonymous", // use provided author or default to "Anonymous"
-        createdAt: new Date()
+        gif: selectedGif, // include the selected GIF data
+        createdAt: new Date(),
       };
 
       // call the onCreateCard function with the new card
@@ -88,7 +97,9 @@ const CardModal = ({ isOpen, onClose, onCreateCard }) => {
                 className={errors.title ? "error" : ""}
                 placeholder="Enter card title..."
               />
-              {errors.title && <span className="error-message">{errors.title}</span>}
+              {errors.title && (
+                <span className="error-message">{errors.title}</span>
+              )}
             </div>
 
             {/* description input */}
@@ -102,7 +113,54 @@ const CardModal = ({ isOpen, onClose, onCreateCard }) => {
                 placeholder="Enter card description..."
                 rows="4"
               />
-              {errors.description && <span className="error-message">{errors.description}</span>}
+              {errors.description && (
+                <span className="error-message">{errors.description}</span>
+              )}
+            </div>
+
+            {/* gif selection */}
+            <div className="form-group">
+              <label>GIF *</label>
+              {selectedGif ? (
+                <div className="selected-gif">
+                  <img
+                    src={selectedGif.url}
+                    alt={selectedGif.title}
+                    style={{
+                      maxWidth: "200px",
+                      maxHeight: "150px",
+                      borderRadius: "4px",
+                    }}
+                  />
+                  <div className="gif-actions">
+                    <button
+                      type="button"
+                      className="change-gif-btn"
+                      onClick={() => setShowGifPicker(true)}
+                    >
+                      Change GIF
+                    </button>
+                    <button
+                      type="button"
+                      className="remove-gif-btn"
+                      onClick={() => setSelectedGif(null)}
+                    >
+                      Remove GIF
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  className="select-gif-btn"
+                  onClick={() => setShowGifPicker(true)}
+                >
+                  Select GIF
+                </button>
+              )}
+              {errors.gif && (
+                <span className="error-message">{errors.gif}</span>
+              )}
             </div>
 
             {/* author input */}
@@ -128,6 +186,17 @@ const CardModal = ({ isOpen, onClose, onCreateCard }) => {
           </button>
         </div>
       </div>
+
+      {/* gif picker modal */}
+      {showGifPicker && (
+        <GifPicker
+          onGifSelect={(gif) => {
+            setSelectedGif(gif);
+            setShowGifPicker(false);
+          }}
+          onClose={() => setShowGifPicker(false)}
+        />
+      )}
     </div>
   );
 };
