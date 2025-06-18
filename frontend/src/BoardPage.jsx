@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, use } from "react";
 import "./BoardPage.css";
 import CardModal from "./CardModal";
 import img from "/src/assets/img/hamilton.jpeg";
@@ -6,8 +6,27 @@ import img from "/src/assets/img/hamilton.jpeg";
 const BoardPage = ({ board, onBack }) => {
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
   // state to manage cards for this board
-  const [boardCards, setBoardCards] = useState(board.cards || []);
+  //for static data
+  //const [boardCards, setBoardCards] = useState(board.cards || []);
 
+  const [boardCards, setBoardCards] = useState([]); // call empty array and fill it with datat from api call
+
+  // fetch cards from backend
+  useEffect(() => {
+    const getCards = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3002/cards/${board.id}/cards`
+        );
+        const data = await response.json();
+        setBoardCards(data);
+      } catch (e) {
+        console.error("Error fetching cards", e);
+      }
+    };
+
+    getCards();
+  }, [board.id]);
   // function to create a new card
   const createCard = (newCard) => {
     console.log("New card created:", newCard);
@@ -50,12 +69,13 @@ const BoardPage = ({ board, onBack }) => {
             <div className="card-list">
               {boardCards.map((card) => (
                 <div key={card.id} className="card">
-                  <h4 className="card-title">{card.title}</h4>
-                  {card.gif && (
+                  {console.log("1. ", card)}
+                  <h4 className="card-title">{card.gifTitle}</h4>
+                  {card.gifUrl && (
                     <div className="card-gif">
                       <img
-                        src={card.gif.url}
-                        alt={card.gif.title}
+                        src={card.gifUrl}
+                        alt={card.gifTitle}
                         className="card-gif-image"
                       />
                     </div>

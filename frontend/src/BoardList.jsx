@@ -16,7 +16,7 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
   useEffect(() => {
     const getBoards = async () => {
       try {
-        const response = await fetch("http://localhost:3001/boards");
+        const response = await fetch("http://localhost:3002/boards");
         const data = await response.json();
         setBoards(data);
         setFilteredBoards(data);
