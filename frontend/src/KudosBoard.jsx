@@ -1,8 +1,15 @@
 import React from "react";
 import "./KudosBoard.css";
-import img from "/src/assets/img/hamilton.jpeg";
 
-const KudosBoard = ({ id, title, description, author, onDelete, onView }) => {
+const KudosBoard = ({
+  id,
+  title,
+  img: boardImg,
+  description,
+  author,
+  onDelete,
+  onView,
+}) => {
   // function to handle the delete button click
   const handleDelete = () => {
     // call the onDelete function passed from parent with this board's id
@@ -18,7 +25,11 @@ const KudosBoard = ({ id, title, description, author, onDelete, onView }) => {
   return (
     <div className="kudos-board">
       {/* display the board img, title, description, and author */}
-      <img src={img} alt={title} className="kudos-image" />
+      <img
+        src={boardImg || "/hamilton.jpeg"}
+        alt={title}
+        className="kudos-image"
+      />
       <div className="kudos-content">
         <h3>{title}</h3>
         <p className="kudos-description">{description}</p>
