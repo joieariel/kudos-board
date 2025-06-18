@@ -12,7 +12,7 @@ const BoardPage = ({ board, onBack }) => {
     console.log("New card created:", newCard);
 
     // add the new card to the board's cards array
-    setBoardCards(prevCards => [...prevCards, newCard]);
+    setBoardCards((prevCards) => [...prevCards, newCard]);
   };
 
   return (
@@ -50,6 +50,15 @@ const BoardPage = ({ board, onBack }) => {
               {boardCards.map((card) => (
                 <div key={card.id} className="card">
                   <h4 className="card-title">{card.title}</h4>
+                  {card.gif && (
+                    <div className="card-gif">
+                      <img
+                        src={card.gif.url}
+                        alt={card.gif.title}
+                        className="card-gif-image"
+                      />
+                    </div>
+                  )}
                   <p className="card-content">{card.content}</p>
                   <p className="card-author">- {card.author}</p>
                 </div>

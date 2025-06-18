@@ -8,9 +8,25 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
   // state to store and manage the boards data
   const [boards, setBoards] = useState(kudosData);
   // state to store filtered boards
-  const [filteredBoards, setFilteredBoards] = useState(kudosData);
+  const [filteredBoards, setFilteredBoards] = useState([]);
   // state to control modal visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // // fetch boards from backend API
+   // useEffect(() => {
+  //   const getBoards = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:3000/api/boards');
+  //       const data = await response.json();
+  //       setBoards(data);
+  //       setFilteredBoards(data);
+  //     } catch (e) {
+  //       console.error('Error fetching', e);
+  //     }
+  //   };
+
+  //   getBoards();
+  // }, []);
 
   // filter boards when search query or category changes
   useEffect(() => {
