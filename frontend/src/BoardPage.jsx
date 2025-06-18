@@ -61,6 +61,10 @@ const BoardPage = ({ board, onBack }) => {
                   )}
                   <p className="card-content">{card.content}</p>
                   <p className="card-author">- {card.author}</p>
+                  <div className="card-btns">
+                    <button className="upvote-btn">Upvote:</button>
+                    <button className="delete-card-btn">🗑️</button>
+                  </div>
                 </div>
               ))}
             </div>

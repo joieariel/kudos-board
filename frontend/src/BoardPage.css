@@ -175,6 +175,34 @@
   margin-bottom: 10px;
 }
 
+.card-btns {
+  display: flex;
+}
+
+.upvote-btn {
+  background-color: #f0b2e1;
+  color: white;
+  border: 1px solid #ff6ba9;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  outline: none;
+}
+
+.upvote-btn:hover {
+  background-color: #ff6ba9;
+  border: 1px solid #f0b2e1;
+}
+
+.upvote-btn:focus,
+.upvote-btn:active {
+  background-color: #ff6ba9;
+  border: 1px solid #f0b2e1;
+  outline: none;
+}
+
 @media (max-width: 768px) {
   .card-list {
     gap: 15px;
