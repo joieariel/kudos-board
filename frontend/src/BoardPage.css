@@ -71,3 +71,38 @@
   border-radius: 8px;
   padding: 20px;
 }
+
+.cards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.cards-header h3 {
+  margin: 0;
+}
+
+.create-card-button {
+  background-color: #f0b2e1;
+  color: white;
+  border: 1px solid #ff6ba9;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  outline: none;
+}
+
+.create-card-button:hover {
+  background-color: #ff6ba9;
+  border: 1px solid #f0b2e1;
+}
+
+.create-card-button:focus,
+.create-card-button:active {
+  background-color: #ff6ba9;
+  border: 1px solid #f0b2e1;
+  outline: none;
+}

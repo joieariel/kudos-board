@@ -19,13 +19,13 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
 
     if (selectedCategory === "recent") {
       // sort by createdAt date (newest first) and take the 6 most recent
-      categoryFiltered = [...boards].sort((a, b) =>
-        b.createdAt - a.createdAt
-      ).slice(0, 6);
+      categoryFiltered = [...boards]
+        .sort((a, b) => b.createdAt - a.createdAt)
+        .slice(0, 6);
     } else if (selectedCategory !== "all") {
       // filter by category (which matches the description field)
-      categoryFiltered = boards.filter(board =>
-        board.description === selectedCategory
+      categoryFiltered = boards.filter(
+        (board) => board.description === selectedCategory
       );
     }
 
@@ -36,7 +36,7 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
     }
 
     // filter boards based on search query
-    const searchFiltered = categoryFiltered.filter(board => {
+    const searchFiltered = categoryFiltered.filter((board) => {
       // search in title, description, and author
       const searchLower = searchQuery.toLowerCase();
       return (
@@ -94,24 +94,26 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
       <div className="board-grid">
         {filteredBoards.length > 0 ? (
           filteredBoards.map((board) => (
-          <div key={board.id} className="board-grid-item">
-            <KudosBoard
-              id={board.id}
-              title={board.title}
-              img={board.img}
-              description={board.description}
-              author={board.author}
-              onDelete={deleteBoard}
-              onView={handleViewBoard}
-            />
-          </div>
+            <div key={board.id} className="board-grid-item">
+              <KudosBoard
+                id={board.id}
+                title={board.title}
+                img={board.img}
+                description={board.description}
+                author={board.author}
+                onDelete={deleteBoard}
+                onView={handleViewBoard}
+              />
+            </div>
           ))
         ) : (
           <div className="no-results">
             <p>
               {searchQuery
                 ? `No boards found matching "${searchQuery}"`
-                : `No ${selectedCategory !== "all" ? selectedCategory : ""} boards found`}
+                : `No ${
+                    selectedCategory !== "all" ? selectedCategory : ""
+                  } boards found`}
             </p>
           </div>
         )}

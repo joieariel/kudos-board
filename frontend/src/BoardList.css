@@ -25,11 +25,19 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
+  outline: none;
 }
 
 .create-button:hover {
   background-color: #ff6ba9;
   border: 1px solid #f0b2e1;
+}
+
+.create-button:focus,
+.create-button:active {
+  background-color: #ff6ba9;
+  border: 1px solid #f0b2e1;
+  outline: none;
 }
 
 .plus-icon {
