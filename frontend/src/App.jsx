@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import Banner from "./Banner.JSX";
+import Banner from "./Banner.jsx";
 import SearchBar from "./SearchBar";
 import FilterDropdown from "./FilterDropdown";
 import BoardList from "./BoardList";
