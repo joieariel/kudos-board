@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./BoardPage.css";
 import CardModal from "./CardModal";
+import img from "/src/assets/img/hamilton.jpeg";
 
 const BoardPage = ({ board, onBack }) => {
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
@@ -99,6 +100,32 @@ const BoardPage = ({ board, onBack }) => {
     }
   };
 
+  // function to handle deleting a card
+  const handleDelete = async (cardId) => {
+    try {
+      const response = await fetch(`http://localhost:3002/cards/${cardId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      console.log("Card deleted:", cardId);
+
+      // remove the card from the local state
+      setBoardCards((prevCards) =>
+        prevCards.filter((card) => card.id !== cardId)
+      );
+    } catch (error) {
+      console.error("Error deleting card:", error);
+      alert("Failed to delete card. Please try again.");
+    }
+  };
+
   return (
     <div className="board-page">
       <div className="board-page-header">
@@ -110,7 +137,7 @@ const BoardPage = ({ board, onBack }) => {
       </div>
       <div className="board-page-content">
         <div className="board-page-info">
-          <img src={board.img} alt={board.title} className="board-page-image" />
+          <img src={img} alt={board.title} className="board-page-image" />
           <div className="board-page-details">
             <p className="board-page-description">{board.description}</p>
             <p className="board-page-author">By: {board.author}</p>
@@ -153,7 +180,12 @@ const BoardPage = ({ board, onBack }) => {
                     >
                       Upvote: {card.voteCount || 0}
                     </button>
-                    <button className="delete-card-btn">Delete Card</button>
+                    <button
+                      className="delete-card-btn"
+                      onClick={() => handleDelete(card.id)}
+                    >
+                      Delete Card
+                    </button>
                   </div>
                 </div>
               ))}
