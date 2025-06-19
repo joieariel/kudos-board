@@ -18,18 +18,18 @@ model Board {
   title       String
   description String
   author      String
-  // img         String
+
 
   cards Card[]
 }
 
 model Card {
-  id       Int    @id @default(autoincrement())
-  title    String
-  content  String
-  author   String
-  gifUrl   String
-  gifTitle String
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String
+  author  String
+  gifUrl  String
+
 
   board   Board @relation(fields: [boardId], references: [id])
   boardId Int

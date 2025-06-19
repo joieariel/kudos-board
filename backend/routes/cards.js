@@ -37,13 +37,14 @@ router.get("/:cardId", async (req, res) => {
 
 //create a card (post request) using database
 router.post("/", async (req, res) => {
-  const { title, description, author, img } = req.body;
+  const { title, content, author, gifUrl, boardId } = req.body;
   const newCard = await prisma.card.create({
     data: {
       title,
-      description,
+      content,
       author,
-      img,
+      gifUrl,
+      boardId: parseInt(boardId),
     },
   });
   res.json(newCard);
@@ -52,14 +53,14 @@ router.post("/", async (req, res) => {
 //updating a card (using PUT) using database
 router.put("/:cardId", async (req, res) => {
   const { cardId } = req.params;
-  const { title, description, author, img } = req.body;
+  const { title, content, author, gifUrl } = req.body;
   const updatedCard = await prisma.card.update({
     where: { id: parseInt(cardId) },
     data: {
       title,
-      description,
+      content,
       author,
-      img,
+      gifUrl,
     },
   });
   res.json(updatedCard);

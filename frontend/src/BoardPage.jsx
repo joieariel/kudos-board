@@ -1,7 +1,6 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import "./BoardPage.css";
 import CardModal from "./CardModal";
-import img from "/src/assets/img/hamilton.jpeg";
 
 const BoardPage = ({ board, onBack }) => {
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
@@ -28,11 +27,42 @@ const BoardPage = ({ board, onBack }) => {
     getCards();
   }, [board.id]);
   // function to create a new card
-  const createCard = (newCard) => {
+  const createCard = async (newCard) => {
     console.log("New card created:", newCard);
 
-    // add the new card to the board's cards array
-    setBoardCards((prevCards) => [...prevCards, newCard]);
+    try {
+      // prepare the card data for the backend API
+      const cardData = {
+        title: newCard.title,
+        content: newCard.content,
+        author: newCard.author,
+        gifUrl: newCard.gif?.url || "", // extract URL from gif object
+        boardId: board.id, // include the board ID
+      };
+
+      // make POST request to create card in database
+      const response = await fetch("http://localhost:3002/cards", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cardData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const savedCard = await response.json();
+      console.log("Card saved to database:", savedCard);
+
+      // add the saved card to the board's cards array
+      setBoardCards((prevCards) => [...prevCards, savedCard]);
+    } catch (error) {
+      console.error("Error creating card:", error);
+      // You might want to show an error message to the user here
+      alert("Failed to create card. Please try again.");
+    }
   };
 
   return (
@@ -70,12 +100,12 @@ const BoardPage = ({ board, onBack }) => {
               {boardCards.map((card) => (
                 <div key={card.id} className="card">
                   {console.log("1. ", card)}
-                  <h4 className="card-title">{card.gifTitle}</h4>
+                  <h4 className="card-title">{card.title}</h4>
                   {card.gifUrl && (
                     <div className="card-gif">
                       <img
                         src={card.gifUrl}
-                        alt={card.gifTitle}
+                        alt={card.title}
                         className="card-gif-image"
                       />
                     </div>
@@ -84,7 +114,7 @@ const BoardPage = ({ board, onBack }) => {
                   <p className="card-author">- {card.author}</p>
                   <div className="card-btns">
                     <button className="upvote-btn">Upvote:</button>
-                    <button className="delete-card-btn">🗑️</button>
+                    <button className="delete-card-btn">Delete Card</button>
                   </div>
                 </div>
               ))}
