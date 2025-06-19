@@ -24,12 +24,12 @@ model Board {
 }
 
 model Card {
-  id      Int    @id @default(autoincrement())
-  title   String
-  content String
-  author  String
-  gifUrl  String
-
+  id        Int    @id @default(autoincrement())
+  title     String
+  content   String
+  author    String
+  gifUrl    String
+  voteCount Int    @default(0)
 
   board   Board @relation(fields: [boardId], references: [id])
   boardId Int
