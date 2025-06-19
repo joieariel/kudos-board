@@ -65,6 +65,40 @@ const BoardPage = ({ board, onBack }) => {
     }
   };
 
+  // function to handle upvoting a card
+  const handleUpvote = async (cardId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3002/cards/${cardId}/upvote`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const updatedCard = await response.json();
+      console.log("Card upvoted:", updatedCard);
+
+      // update the card in the local state
+      setBoardCards((prevCards) =>
+        prevCards.map((card) =>
+          card.id === cardId
+            ? { ...card, voteCount: updatedCard.voteCount }
+            : card
+        )
+      );
+    } catch (error) {
+      console.error("Error upvoting card:", error);
+      alert("Failed to upvote card. Please try again.");
+    }
+  };
+
   return (
     <div className="board-page">
       <div className="board-page-header">
@@ -117,7 +151,12 @@ const BoardPage = ({ board, onBack }) => {
                   <p className="card-content">{card.content}</p>
                   <p className="card-author">- {card.author}</p>
                   <div className="card-btns">
-                    <button className="upvote-btn">Upvote:</button>
+                    <button
+                      className="upvote-btn"
+                      onClick={() => handleUpvote(card.id)}
+                    >
+                      Upvote: {card.voteCount || 0}
+                    </button>
                     <button className="delete-card-btn">Delete Card</button>
                   </div>
                 </div>
