@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./BoardPage.css";
 import CardModal from "./CardModal";
-import img from "/src/assets/img/hamilton.jpeg";
 
 const BoardPage = ({ board, onBack }) => {
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
@@ -137,7 +136,7 @@ const BoardPage = ({ board, onBack }) => {
       </div>
       <div className="board-page-content">
         <div className="board-page-info">
-          <img src={img} alt={board.title} className="board-page-image" />
+          <img src="/joie.jpg" alt={board.title} className="board-page-image" />
           <div className="board-page-details">
             <p className="board-page-description">{board.description}</p>
             <p className="board-page-author">By: {board.author}</p>

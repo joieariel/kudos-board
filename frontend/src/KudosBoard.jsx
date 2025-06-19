@@ -26,7 +26,7 @@ const KudosBoard = ({
     <div className="kudos-board">
       {/* display the board img, title, description, and author */}
       <img
-        src={boardImg || "/hamilton.jpeg"}
+        src={boardImg || "/joie.jpg"}
         alt={title}
         className="kudos-image"
       />

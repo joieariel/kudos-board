@@ -51,7 +51,7 @@ const CreateBoardModal = ({ isOpen, onClose, onCreateBoard }) => {
         title,
         description: category, // Category is stored as description in the data structure
         author: author.trim() || "Anonymous", // Default to "Anonymous" if author is empty
-        img: "/src/assets/img/hamilton.jpeg", // Use default image
+        img: "/src/assets/img/joie.jpg", // Use default image
         createdAt: new Date()
       };
 
