@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import KudosBoard from "./KudosBoard";
-import kudosData from "./data/data";
 import CreateBoardModal from "./CreateBoardModal";
 import "./BoardList.css";
 
@@ -39,9 +38,10 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
         .sort((a, b) => b.createdAt - a.createdAt)
         .slice(0, 6);
     } else if (selectedCategory !== "all") {
-      // filter by category (which matches the description field)
+      // filter by category (which matches the description field) - case insensitive
       categoryFiltered = boards.filter(
-        (board) => board.description === selectedCategory
+        (board) =>
+          board.description.toLowerCase() === selectedCategory.toLowerCase()
       );
     }
 
