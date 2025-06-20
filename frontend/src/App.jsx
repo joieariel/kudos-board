@@ -38,6 +38,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>Kudos Board 🎉</h1>
+        <button className="toggle-button">Dark Mode</button>
       </header>
 
       {selectedBoard ? (

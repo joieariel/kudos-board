@@ -38,7 +38,7 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
     if (selectedCategory === "recent") {
       // sort by createdAt date (newest first) and take the 6 most recent
       categoryFiltered = [...boards]
-        .sort((a, b) => b.createdAt - a.createdAt)
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .slice(0, 6);
     } else if (selectedCategory !== "all") {
       // filter by category (which matches the description field) - case insensitive
@@ -69,11 +69,31 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
   }, [searchQuery, selectedCategory, boards]);
 
   // function to delete a board by its id
-  const deleteBoard = (id) => {
-    // filter out the board with the matching id
-    const updatedBoards = boards.filter((board) => board.id !== id);
-    // update the state with the new array that doesn't include the deleted board
-    setBoards(updatedBoards);
+  const deleteBoard = async (id) => {
+    try {
+      // make DELETE request to backend API
+      const response = await fetch(`${BACKEND_API}/boards/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      console.log("Board deleted from database");
+
+      // only update local state if backend deletion was successful
+      const updatedBoards = boards.filter((board) => board.id !== id);
+      setBoards(updatedBoards);
+
+      // also update filtered boards to immediately reflect the change in UI
+      setFilteredBoards((prevFiltered) =>
+        prevFiltered.filter((board) => board.id !== id)
+      );
+    } catch (error) {
+      console.error("Error deleting board:", error);
+      alert("Failed to delete board. Please try again.");
+    }
   };
 
   // function to create a new board
