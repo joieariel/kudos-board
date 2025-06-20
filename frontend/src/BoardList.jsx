@@ -69,11 +69,26 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
   }, [searchQuery, selectedCategory, boards]);
 
   // function to delete a board by its id
-  const deleteBoard = (id) => {
-    // filter out the board with the matching id
-    const updatedBoards = boards.filter((board) => board.id !== id);
-    // update the state with the new array that doesn't include the deleted board
-    setBoards(updatedBoards);
+  const deleteBoard = async (id) => {
+    try {
+      // make DELETE request to backend API
+      const response = await fetch(`${BACKEND_API}/boards/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      console.log("Board deleted from database");
+
+      // only update local state if backend deletion was successful
+      const updatedBoards = boards.filter((board) => board.id !== id);
+      setBoards(updatedBoards);
+    } catch (error) {
+      console.error("Error deleting board:", error);
+      alert("Failed to delete board. Please try again.");
+    }
   };
 
   // function to create a new board
