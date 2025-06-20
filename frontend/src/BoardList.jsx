@@ -85,6 +85,11 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
       // only update local state if backend deletion was successful
       const updatedBoards = boards.filter((board) => board.id !== id);
       setBoards(updatedBoards);
+
+      // also update filtered boards to immediately reflect the change in UI
+      setFilteredBoards((prevFiltered) =>
+        prevFiltered.filter((board) => board.id !== id)
+      );
     } catch (error) {
       console.error("Error deleting board:", error);
       alert("Failed to delete board. Please try again.");
