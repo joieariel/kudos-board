@@ -38,7 +38,7 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
     if (selectedCategory === "recent") {
       // sort by createdAt date (newest first) and take the 6 most recent
       categoryFiltered = [...boards]
-        .sort((a, b) => b.createdAt - a.createdAt)
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .slice(0, 6);
     } else if (selectedCategory !== "all") {
       // filter by category (which matches the description field) - case insensitive
