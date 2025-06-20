@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Banner from "./Banner.jsx";
 import SearchBar from "./SearchBar";
@@ -13,6 +13,8 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
   // state to track the selected category
   const [selectedCategory, setSelectedCategory] = useState("all");
+  // state to track dark mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   // function to handle category change
   const handleCategoryChange = (category) => {
@@ -34,11 +36,27 @@ const App = () => {
     setSelectedBoard(null);
   };
 
+  // function to toggle dark mode
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  // effect to update body class when dark mode changes
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
+  }, [isDarkMode]);
+
   return (
-    <div className="App">
+    <div className={`App ${isDarkMode ? "dark-mode" : ""}`}>
       <header className="App-header">
         <h1>Kudos Board 🎉</h1>
-        <button className="toggle-button">Dark Mode</button>
+        <button className="toggle-button" onClick={toggleDarkMode}>
+          {isDarkMode ? "Light Mode" : "Dark Mode"}
+        </button>
       </header>
 
       {selectedBoard ? (
