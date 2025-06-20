@@ -11,11 +11,14 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
   // state to control modal visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Get backend API URL from environment variable
+  const BACKEND_API = import.meta.env.VITE_BACKEND_URL;
+
   // fetch boards from backend API
   useEffect(() => {
     const getBoards = async () => {
       try {
-        const response = await fetch("http://localhost:3002/boards");
+        const response = await fetch(`${BACKEND_API}/boards`);
         const data = await response.json();
         setBoards(data);
         setFilteredBoards(data);
@@ -74,11 +77,40 @@ const BoardList = ({ onViewBoard, searchQuery, selectedCategory }) => {
   };
 
   // function to create a new board
-  const createBoard = (newBoard) => {
-    // add the new board to the boards array
-    const updatedBoards = [...boards, newBoard];
-    // update the state with the new array that includes the new board
-    setBoards(updatedBoards);
+  const createBoard = async (newBoard) => {
+    try {
+      // prepare the board data for the backend API
+      const boardData = {
+        title: newBoard.title,
+        description: newBoard.description,
+        author: newBoard.author,
+        img: newBoard.img,
+      };
+
+      // make POST request to create board in database
+      const response = await fetch(`${BACKEND_API}/boards`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(boardData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const savedBoard = await response.json();
+      console.log("Board saved to database:", savedBoard);
+
+      // add the saved board to the boards array
+      const updatedBoards = [...boards, savedBoard];
+      // update the state with the new array that includes the new board
+      setBoards(updatedBoards);
+    } catch (error) {
+      console.error("Error creating board:", error);
+      alert("Failed to create board. Please try again.");
+    }
   };
 
   // function to handle viewing a board
