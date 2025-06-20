@@ -100,3 +100,34 @@
     max-width: 100%;
   }
 }
+
+/* Dark Mode Styles */
+.App.dark-mode .section-title {
+  color: #ffffff;
+}
+
+.App.dark-mode .create-button {
+  background-color: #ffc2e8;
+  color: #000000;
+  border: 1px solid #ffc2e8;
+}
+
+.App.dark-mode .create-button:hover {
+  background-color: #ffb3e0;
+  border: 1px solid #ffb3e0;
+}
+
+.App.dark-mode .create-button:focus,
+.App.dark-mode .create-button:active {
+  background-color: #ffb3e0;
+  border: 1px solid #ffb3e0;
+}
+
+.App.dark-mode .no-results {
+  background-color: #3d3d3d;
+  border: 1px solid #5a5a5a;
+}
+
+.App.dark-mode .no-results p {
+  color: #cccccc;
+}

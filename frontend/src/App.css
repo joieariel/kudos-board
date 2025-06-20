@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   color: #ff6ba9;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -74,4 +74,35 @@
 .App-footer p {
   margin: 0;
   font-size: 0.9rem;
+}
+
+/* Dark Mode Styles */
+.App.dark-mode {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.App.dark-mode .App-header {
+  background-color: #2d2d2d;
+  color: #ffc2e8;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+.App.dark-mode .toggle-button {
+  background-color: #ffc2e8;
+  color: #000000;
+}
+
+.App.dark-mode .toggle-button:hover {
+  background-color: #ffb3e0;
+}
+
+.App.dark-mode .App-footer {
+  background-color: #ffc2e8;
+  color: #000000;
+  box-shadow: 0 -2px 8px rgba(255, 255, 255, 0.1);
+}
+
+.App.dark-mode .main-content {
+  color: #ffffff;
 }

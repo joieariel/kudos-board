@@ -187,7 +187,7 @@ const BoardPage = ({ board, onBack }) => {
               ))}
             </div>
           ) : (
-            <p>No cards yet.</p>
+            <p className="no-cards-message">No cards yet.</p>
           )}
         </div>
       </div>

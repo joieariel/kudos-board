@@ -70,3 +70,14 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Dark mode override for body */
+body.dark-mode {
+  background-color: #1a1a1a !important;
+  color: #ffffff;
+}
+
+body.dark-mode :root {
+  background-color: #1a1a1a !important;
+  color: #ffffff;
+}

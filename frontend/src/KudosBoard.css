@@ -55,7 +55,8 @@
   margin-top: auto;
 }
 
-.view-button, .delete-button {
+.view-button,
+.delete-button {
   padding: 8px 12px;
   border: none;
   border-radius: 4px;
@@ -83,4 +84,44 @@
 .delete-button:hover {
   background-color: #d43c2b;
   transform: translateY(-2px);
+}
+
+/* Dark Mode Styles */
+.App.dark-mode .kudos-board {
+  background-color: #3d3d3d;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+.App.dark-mode .kudos-board:hover {
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.App.dark-mode .kudos-content h3 {
+  color: #ffffff;
+}
+
+.App.dark-mode .kudos-description {
+  color: #cccccc;
+}
+
+.App.dark-mode .kudos-author {
+  color: #aaaaaa;
+}
+
+.App.dark-mode .view-button {
+  background-color: #ffc2e8;
+  color: #000000;
+}
+
+.App.dark-mode .view-button:hover {
+  background-color: #ffb3e0;
+}
+
+.App.dark-mode .delete-button {
+  background-color: #e17c71;
+  color: white;
+}
+
+.App.dark-mode .delete-button:hover {
+  background-color: #d43c2b;
 }

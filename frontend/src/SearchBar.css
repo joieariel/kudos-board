@@ -24,7 +24,8 @@
   box-shadow: 0 0 5px rgba(255, 107, 169, 0.5);
 }
 
-.search-button, .clear-button-text {
+.search-button,
+.clear-button-text {
   padding: 10px 15px;
   border: none;
   border-radius: 25px;
@@ -60,7 +61,8 @@
     padding: 8px 12px;
   }
 
-  .search-button, .clear-button-text {
+  .search-button,
+  .clear-button-text {
     font-size: 0.9rem;
     padding: 8px 12px;
   }
@@ -79,7 +81,41 @@
     width: 100%;
   }
 
-  .search-button, .clear-button-text {
+  .search-button,
+  .clear-button-text {
     flex: 1;
   }
+}
+
+/* Dark Mode Styles */
+.App.dark-mode .search-input {
+  background-color: #3d3d3d;
+  color: #ffffff;
+  border: 2px solid white;
+}
+
+.App.dark-mode .search-input::placeholder {
+  color: #cccccc;
+}
+
+.App.dark-mode .search-input:focus {
+  box-shadow: 0 0 5px rgba(255, 107, 169, 0.5);
+}
+
+.App.dark-mode .search-button {
+  background-color: #ffc2e8;
+  color: #000000;
+}
+
+.App.dark-mode .search-button:hover {
+  background-color: #ffb3e0;
+}
+
+.App.dark-mode .clear-button-text {
+  background-color: #5a5a5a;
+  color: white;
+}
+
+.App.dark-mode .clear-button-text:hover {
+  background-color: #6a6a6a;
 }
