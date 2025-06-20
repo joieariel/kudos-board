@@ -75,11 +75,11 @@
 }
 
 .board-grid-item {
-  flex: 0 0 calc(33.333% - 20px);
+  flex: 0 0 calc(25% - 20px);
   display: flex;
   flex-direction: column;
   min-width: 250px;
-  max-width: calc(33.333% - 20px);
+  max-width: calc(25% - 20px);
 }
 
 @media (max-width: 768px) {
