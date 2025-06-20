@@ -10,13 +10,14 @@ const BoardPage = ({ board, onBack }) => {
 
   const [boardCards, setBoardCards] = useState([]); // call empty array and fill it with datat from api call
 
+  // Get backend API URL from environment variable
+  const BACKEND_API = import.meta.env.VITE_BACKEND_URL;
+
   // fetch cards from backend
   useEffect(() => {
     const getCards = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3002/cards/${board.id}/cards`
-        );
+        const response = await fetch(`${BACKEND_API}/cards/${board.id}/cards`);
         const data = await response.json();
         setBoardCards(data);
       } catch (e) {
@@ -39,9 +40,8 @@ const BoardPage = ({ board, onBack }) => {
         gifUrl: newCard.gif?.url || "", // extract URL from gif object
         boardId: board.id, // include the board ID
       };
-
       // make POST request to create card in database
-      const response = await fetch("http://localhost:3002/cards", {
+      const response = await fetch(`${BACKEND_API}/cards`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const BoardPage = ({ board, onBack }) => {
       setBoardCards((prevCards) => [...prevCards, savedCard]);
     } catch (error) {
       console.error("Error creating card:", error);
-      // You might want to show an error message to the user here
+
       alert("Failed to create card. Please try again.");
     }
   };
@@ -68,15 +68,12 @@ const BoardPage = ({ board, onBack }) => {
   // function to handle upvoting a card
   const handleUpvote = async (cardId) => {
     try {
-      const response = await fetch(
-        `http://localhost:3002/cards/${cardId}/upvote`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${BACKEND_API}/cards/${cardId}/upvote`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -102,7 +99,7 @@ const BoardPage = ({ board, onBack }) => {
   // function to handle deleting a card
   const handleDelete = async (cardId) => {
     try {
-      const response = await fetch(`http://localhost:3002/cards/${cardId}`, {
+      const response = await fetch(`${BACKEND_API}/cards/${cardId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
