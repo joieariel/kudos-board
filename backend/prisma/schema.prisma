@@ -14,11 +14,12 @@ datasource db {
 }
 
 model Board {
-  id          Int    @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   title       String
   description String
   author      String
-
+  // for getting the latest 6 boards
+  createdAt   DateTime @default(now())
 
   cards Card[]
 }
