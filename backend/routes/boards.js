@@ -12,7 +12,10 @@ const prisma = new PrismaClient();
 //retrieve all the boards using database
 // name of model - after schema. (not database)
 router.get("/", async (req, res) => {
-  const boards = await prisma.board.findMany();
+  const boards = await prisma.board.findMany({
+    orderBy: { id: "desc" },
+    take: 6,
+  });
   console.log(boards);
   res.json(boards);
 });
