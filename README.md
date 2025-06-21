@@ -139,6 +139,10 @@ Deployed Application (**https://kudos-board-1-ypir.onrender.com**): [Kudos Board
 
 `<div style="position: relative; padding-bottom: 64.55089820359281%; height: 0;"><iframe src="https://www.loom.com/embed/c862010b392e41acb59f12cdd35360d1?sid=a06bc42d-25d7-494a-b400-4f34077cd453" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>`
 
+<div style="position: relative; padding-bottom: 64.55089820359281%; height: 0;"><iframe src="https://www.loom.com/embed/c862010b392e41acb59f12cdd35360d1?sid=a06bc42d-25d7-494a-b400-4f34077cd453" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+
+
+
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
